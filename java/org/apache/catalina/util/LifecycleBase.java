@@ -132,7 +132,9 @@ public abstract class LifecycleBase implements Lifecycle {
         }
 
         try {
+            // 观察者模式，这个时候会调用监听器
             setStateInternal(LifecycleState.INITIALIZING, null, false);
+            // 模版方法，这个 initInternal() 是一个抽象方法
             initInternal();
             setStateInternal(LifecycleState.INITIALIZED, null, false);
         } catch (Throwable t) {
