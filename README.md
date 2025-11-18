@@ -1,5 +1,27 @@
 ## Welcome to Apache Tomcat!
 
+### 编译过程
+1. JDK：17
+2. 添加pom文件
+3. 在根目录下创建 home 文件夹，，将根目录下的 conf 文件复制到 home 文件夹下，将根目录下的 webapps 文件夹复制到 home 文件夹下，只留下 ROOT 文件夹，其余删除
+4. 创建启动 Application，添加启动类：org.apache.catalina.startup.Bootstrap，并添加 VM options:
+    ```markdown
+    -Dcatalina.home=/Volumes/mymac/project/java/tomcat-main/home
+    -Dcatalina.base=/Volumes/mymac/project/java/tomcat-main/home
+    -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+    -Djava.util.logging.config.file=/Volumes/mymac/project/java/tomcat-main/home/conf/logging.properties
+    -Dfile.encoding=utf-8
+   ```
+5. 在 **org.apache.catalina.startup.ContextConfig#configureStart** 方法中添加:context.addServletContainerInitializer(new JasperInitializer(), null); 这是为了启动后能正常返回index.jsp 文件
+6. 如果出现乱码到话，在 org.apache.tomcat.util.res.StringManager#getString(String key) 方法最后添加如下代码:
+    ```java
+        if (str != null) {
+            str = new String(str.getBytes(StandardCharsets.ISO_8859_1),
+                    StandardCharsets.UTF_8);
+        }
+    ```
+7. 运行，浏览器访问 http://localhost:8080/
+
 ### What Is It?
 
 The Apache Tomcat® software is an open source implementation of the Java

@@ -148,8 +148,6 @@ public class StringManager {
             str = null;
         }
 
-
-
         return str;
     }
 
