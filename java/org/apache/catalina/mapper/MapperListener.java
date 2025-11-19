@@ -103,7 +103,12 @@ public class MapperListener extends LifecycleMBeanBase
 
         findDefaultHost();
 
+        /**
+         * 递归为每一个对象添加 MapperListener，这样所有的 container 的 listener 就都指向了 MapperListener
+         * 好处就是只有一个 mapper 对象，可以把所有的映射全部保存下来
+         */
         addListeners(engine);
+        // 拿到 servlet 引擎的子容器组，那不就是 hosts 吗
 
         Container[] conHosts = engine.findChildren();
         for (Container conHost : conHosts) {

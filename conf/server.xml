@@ -132,6 +132,8 @@
 
       <Host name="localhost"  appBase="webapps"
             unpackWARs="true" autoDeploy="true">
+        <!-- 别名，org.apache.catalina.mapper.MapperListener.registerHost -->
+        <Alias>com.yashon</Alias>
 
         <!-- SingleSignOn valve, share authentication between web applications
              Documentation at: /docs/config/valve.html -->

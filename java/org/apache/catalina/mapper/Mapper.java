@@ -1704,12 +1704,18 @@ public final class Mapper {
         public final String path;
         public final int slashCount;
         public final WebResourceRoot resources;
+        // context 的欢迎页面，也就是看看有没有匹配的默认首页文件
         public String[] welcomeResources;
+        // 默认匹配（仅只有一个，如果是多个就不是默认了），当所有的都不满足的时候，指定的URL：
         public MappedWrapper defaultWrapper = null;
+        // 精准匹配（可能有多个，即一个context下有多个组wrapper），完整的匹配到URL：
         public MappedWrapper[] exactWrappers = new MappedWrapper[0];
+        // 路径（通配符）匹配，匹配前面大部份URL，后面任意，比如 /servlet-demo/*
         public MappedWrapper[] wildcardWrappers = new MappedWrapper[0];
+        // 扩展匹配，以扩展名的形式匹配到URL，比如*.jsp
         public MappedWrapper[] extensionWrappers = new MappedWrapper[0];
         public int nesting = 0;
+        // 这个 context 是否还有用，是否暂停
         private volatile boolean paused;
 
         public ContextVersion(String version, String path, int slashCount,

@@ -780,6 +780,7 @@ public class Catalina {
     public void start() {
 
         if (getServer() == null) {
+            // 解析 server.xml
             load();
         }
 
